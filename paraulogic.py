@@ -1,45 +1,51 @@
-import pickle
-with open ('diec.txt', 'rb') as fp:
-    words = pickle.load(fp)
+import csv
+from datetime import datetime
 
-word_dict = {}
+file_path = 'clean_words.csv'
 
-for word in words:
+# Initialize an empty list to store words
+words_lt = []
+
+# Read the CSV file
+with open(file_path, mode="r", encoding="utf-8") as file:
+    reader = csv.reader(file)
+    for row in reader:
+        words_lt.append(row[0])
+
+words_dict = {}
+
+for word in words_lt:
     word_setted = ''.join((sorted(list(set(word)))))
-    if word_setted in word_dict:
-        word_dict[word_setted].append(word)
+    if word_setted in words_dict:
+        words_dict[word_setted].append(word)
     else:
-        word_dict[word_setted] = []
-        word_dict[word_setted].append(word)
-
+        words_dict[word_setted] = []
+        words_dict[word_setted].append(word)
 
 def powerset(set_of_letters, center_letter):
     powerset = []
+    set_of_letters = list(set_of_letters)
     len_set = len(set_of_letters)
     for i in range(1 << len_set):
         powerset.append([set_of_letters[j] for j in range(len_set) if (i & (1 << j))])
     powerset = [''.join((sorted(list(s)))) for s in powerset if center_letter in s]
     return powerset
 
-set_of_letters = list('adotenz')
-center_letter = 't'
+set_of_letters = 'maltiu'
+center_letter = 'a'
 
-powerset = powerset(set_of_letters, center_letter)
-#powerset
+power_set = powerset(set_of_letters, center_letter)
+
 
 solution_words = []
-for combi in powerset:
+for combi in power_set:
     try:
-        solution_words.extend(word_dict[combi])
+        solution_words.extend(words_dict[combi])
     except:
         pass
 
 solution_words = sorted(list(set([word for word in solution_words if len(word) >= 3])))
-len(solution_words)
-
-solution_words
-
-from datetime import datetime
+print(solution_words)
 
 today_date = datetime.today().strftime('%Y_%m_%d')
 
