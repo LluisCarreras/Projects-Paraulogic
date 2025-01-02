@@ -22,8 +22,9 @@ for word in words_lt:
         words_dict[word_setted] = []
         words_dict[word_setted].append(word)
 
-def powerset(set_of_letters, center_letter):
+def powerset(set_of_letters):
     powerset = []
+    center_letter = set_of_letters[0]
     set_of_letters = list(set_of_letters)
     len_set = len(set_of_letters)
     for i in range(1 << len_set):
@@ -31,10 +32,9 @@ def powerset(set_of_letters, center_letter):
     powerset = [''.join((sorted(list(s)))) for s in powerset if center_letter in s]
     return powerset
 
-set_of_letters = 'maltiu'
-center_letter = 'a'
+set_of_letters = 'sodiau'
 
-power_set = powerset(set_of_letters, center_letter)
+power_set = powerset(set_of_letters)
 
 
 solution_words = []
@@ -49,7 +49,7 @@ print(solution_words)
 
 today_date = datetime.today().strftime('%Y_%m_%d')
 
-file_name = 'solucio_' + today_date + '.txt'
+file_name = 'solution_' + today_date + '.txt'
 textfile = open(file_name, "w")
 for element in solution_words:
     textfile.write(element + "\n")
