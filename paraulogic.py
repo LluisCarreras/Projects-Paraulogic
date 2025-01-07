@@ -45,6 +45,7 @@ def get_letters():
     options.add_argument("--disable-gpu")  # Disable GPU acceleration
     options.add_argument("--no-sandbox")  # Required for running in containers
     options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+    options.binary_location = "/usr/bin/google-chrome"  # Explicitly set Chrome binary path
 
     # Set up the Selenium WebDriver (e.g., ChromeDriver)
     driver = webdriver.Chrome(options=options) 
