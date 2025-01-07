@@ -37,8 +37,8 @@ jobs:
     # Step 4: Install Chrome and ChromeDriver
     - name: Install Specific Chrome Version
       run: |
-        wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.198-1_amd64.deb
-        sudo apt install -y ./google-chrome-stable_114.0.5735.198-1_amd64.deb
+        wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_121.0.6167.139-1_amd64.deb
+        sudo apt install -y ./google-chrome-stable_121.0.6167.139-1_amd64.deb
         google-chrome --version
     
     - name: Install Matching ChromeDriver
