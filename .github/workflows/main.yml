@@ -28,31 +28,20 @@ jobs:
         pip install -r requirements.txt
 
     # Step 4: Install Chrome and ChromeDriver
-    - name: Install Google Chrome
+    - name: Install Specific Chrome Version
       run: |
         sudo apt-get update
-        sudo apt-get install -y wget
-        wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        sudo apt install -y ./google-chrome-stable_current_amd64.deb
-        google-chrome --version  
-
-    - name: Install ChromeDriver
+        wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.198-1_amd64.deb
+        sudo apt install -y ./google-chrome-stable_114.0.5735.198-1_amd64.deb
+        google-chrome --version
+    
+    - name: Install Matching ChromeDriver
       run: |
-        set -e  # Fail the script on any error
-        echo "Getting Chrome version..."
-        CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' || echo "Failed to extract Chrome version")
-        echo "Chrome version: $CHROME_VERSION"
-    
-        echo "Getting ChromeDriver version..."
-        DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION" || curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-        echo "ChromeDriver version: $DRIVER_VERSION"
-    
-        echo "Downloading ChromeDriver..."
-        wget -q "https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip" || echo "Failed to download ChromeDriver"
+        DRIVER_VERSION=114.0.5735.198
+        wget -q "https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip"
         unzip -o chromedriver_linux64.zip
         sudo mv chromedriver /usr/bin/chromedriver
         sudo chmod +x /usr/bin/chromedriver
-        echo "Installed ChromeDriver:"
         chromedriver --version
 
     # Step 5: Debug Chrome Installation
