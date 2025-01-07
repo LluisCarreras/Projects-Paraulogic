@@ -2,6 +2,7 @@ import csv
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from pathlib import Path
 
 def get_letters():
     """
@@ -35,7 +36,7 @@ def get_letters():
         Surrounding letters: "B", "C", "D", "E", "F", "G"
     The function will return: "abcdefg"
     """
-    
+
     # Set up the Selenium WebDriver (e.g., ChromeDriver)
     driver = webdriver.Chrome()  # Ensure you have the ChromeDriver installed
     url = "https://www.vilaweb.cat/paraulogic/"
@@ -200,7 +201,7 @@ def get_solution(the_powerset, words_dict):
         try:
             solution_words.extend(words_dict[combi])
         except:
-            print('Error while finding the solution.')
+            pass
 
     solution_words = sorted(list(set([word for word in solution_words if len(word) >= 3])))
     print(solution_words)
@@ -233,14 +234,23 @@ def save_solution(solution):
 
     today_date = datetime.today().strftime('%Y_%m_%d')
 
-    file_name = 'solution_' + today_date + '.txt'
-    textfile = open(file_name, "w")
+    # Example path components
+    # Get the current working directory
+    current_working_dir = Path.cwd()
+    folder = "solutions"
+    filename = 'solution_' + today_date + '.txt'
+
+    # Create a platform-independent path
+    path = current_working_dir / folder / filename
+    
+    # Save in txt file
+    textfile = open(path, "w")
     for element in solution:
         textfile.write(element + "\n")
     textfile.close()
 
 
-set_of_letters = get_letters() #'ripevob' 
+set_of_letters = get_letters()  
 words_dict = make_dictionary()
 power_set = powerset(set_of_letters)
 solution = get_solution(power_set, words_dict)
