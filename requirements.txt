@@ -1,6 +1,6 @@
 pandas==2.2.3
 requests==2.32.3
 beautifulsoup4==4.12.3
-matplotlib==3.10.0
+matplotlib==3.9.4
 seaborn==0.13.2
 selenium==4.27.1
