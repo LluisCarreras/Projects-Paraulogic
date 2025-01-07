@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from pathlib import Path
+import shutil
 
 
 def get_letters():
@@ -45,7 +46,14 @@ def get_letters():
     options.add_argument("--disable-gpu")  # Disable GPU acceleration
     options.add_argument("--no-sandbox")  # Required for running in containers
     options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
-    options.binary_location = "/usr/bin/google-chrome"  # Explicitly set Chrome binary path
+
+    # Dynamically find Chrome binary location
+    chrome_binary = shutil.which("google-chrome")
+    if chrome_binary:
+        options.binary_location = chrome_binary
+    else:
+        raise FileNotFoundError("Google Chrome binary not found in PATH")
+    
 
     # Set up the Selenium WebDriver (e.g., ChromeDriver)
     driver = webdriver.Chrome(options=options) 
