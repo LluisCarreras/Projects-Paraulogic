@@ -28,14 +28,18 @@ jobs:
         pip install -r requirements.txt
 
     # Step 4: Install Chrome and ChromeDriver
-    - name: Install Chrome and ChromeDriver
+    - name: Install Google Chrome
       run: |
         sudo apt-get update
-        sudo apt-get install -y wget unzip
+        sudo apt-get install -y wget
         wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         sudo apt install -y ./google-chrome-stable_current_amd64.deb
+        google-chrome --version  # Verify installation
+
+    - name: Install ChromeDriver
+      run: |
         sudo apt-get install -y chromium-chromedriver
-        export PATH=$PATH:/usr/lib/chromium-browser/
+        chromedriver --version  # Verify installation
 
     # Step 5: Run the Python script
     - name: Run Python file
