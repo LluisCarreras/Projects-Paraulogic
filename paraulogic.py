@@ -2,7 +2,9 @@ import csv
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from pathlib import Path
+
 
 def get_letters():
     """
@@ -37,8 +39,15 @@ def get_letters():
     The function will return: "abcdefg"
     """
 
+    # Configure Chrome to run in headless mode
+    options = Options()
+    options.add_argument("--headless")  # Run in headless mode
+    options.add_argument("--disable-gpu")  # Disable GPU acceleration
+    options.add_argument("--no-sandbox")  # Required for running in containers
+    options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+
     # Set up the Selenium WebDriver (e.g., ChromeDriver)
-    driver = webdriver.Chrome()  # Ensure you have the ChromeDriver installed
+    driver = webdriver.Chrome(options=options) 
     url = "https://www.vilaweb.cat/paraulogic/"
     driver.get(url)
 
