@@ -1,4 +1,4 @@
-name: Automate Paraulogic Task
+name: Automate Paraulogic Tasks
 
 on:
   schedule:
