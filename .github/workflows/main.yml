@@ -34,18 +34,29 @@ jobs:
         sudo apt-get install -y wget
         wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         sudo apt install -y ./google-chrome-stable_current_amd64.deb
-        google-chrome --version  # Verify installation
+        google-chrome --version  
 
     - name: Install ChromeDriver
       run: |
-        sudo apt-get install -y chromium-chromedriver
-        chromedriver --version  # Verify installation
+        CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+        DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+        wget -q "https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip"
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/bin/chromedriver
+        sudo chmod +x /usr/bin/chromedriver
+        chromedriver --version
 
-    # Step 5: Run the Python script
+    # Step 5: Debug Chrome Installation
+    - name: Debug Chrome Installation
+      run: |
+        ls -l /usr/bin/google-chrome
+        google-chrome --version
+
+    # Step 6: Run the Python script
     - name: Run Python file
       run: python paraulogic.py
 
-    # Step 6: Push changes to the repository
+    # Step 7: Push changes to the repository
     - name: Configure Git user
       run: |
         git config --global user.name "GitHub Actions"
