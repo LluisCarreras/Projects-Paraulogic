@@ -1,0 +1,2 @@
+[console_scripts]
+install_chromedriver = chromedriver_autoinstall.command_line:install_chromedriver
