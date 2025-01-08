@@ -3,9 +3,56 @@ from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from pathlib import Path
 import shutil
+import chromedriver_autoinstaller
+from pyvirtualdisplay.display import Display
+import platform
 
+
+
+
+
+def get_webdriver():
+
+    if platform.system() != "Windows":
+        from pyvirtualdisplay.display import Display
+        display = Display(visible=False, size=(800, 800))
+        display.start()
+
+    # Check if the current version of chromedriver exists
+    chromedriver_autoinstaller.install()
+    # and if it doesn't exist, download it automatically,
+    # then add chromedriver to path
+
+    chrome_options = webdriver.ChromeOptions()
+
+    # Add your options as needed
+    options = [
+        # Define window size here
+        "--window-size=1200,1200",
+        "--ignore-certificate-errors"
+
+        # "--headless",
+        # "--disable-gpu",
+        # "--window-size=1920,1200",
+        # "--ignore-certificate-errors",
+        # "--disable-extensions",
+        # "--no-sandbox",
+        # "--disable-dev-shm-usage",
+        # '--remote-debugging-port=9222'
+    ]
+
+    for option in options:
+        chrome_options.add_argument(option)
+
+
+    driver = webdriver.Chrome(options=chrome_options)
+
+    return driver
+
+    
 
 def get_letters():
     """
@@ -41,7 +88,7 @@ def get_letters():
     """
 
     # Set up the Selenium WebDriver (e.g., ChromeDriver)
-    driver = webdriver.Chrome() 
+    driver = get_webdriver() 
     url = "https://www.vilaweb.cat/paraulogic/"
     driver.get(url)
 
