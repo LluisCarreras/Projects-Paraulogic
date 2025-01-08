@@ -15,7 +15,7 @@
         }
         ol {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* Create 5 columns */
+            grid-template-columns: repeat(5, 1fr); /* Default: 5 columns */
             gap: 10px; /* Space between items */
             padding: 0;
             list-style-position: inside;
@@ -26,6 +26,12 @@
             padding: 10px;
             border-radius: 4px;
             font-size: 14px;
+        }
+        /* Media query for smaller screens (mobile) */
+        @media (max-width: 768px) {
+            ol {
+                grid-template-columns: repeat(2, 1fr); /* Change to 2 columns */
+            }
         }
     </style>
 </head>
