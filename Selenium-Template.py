@@ -2,10 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 import chromedriver_autoinstaller
-#from pyvirtualdisplay.display import Display
+from pyvirtualdisplay.display import Display
 
-#display = Display(visible=False, size=(800, 800))
-#display.start()
+display = Display(visible=False, size=(800, 800))
+display.start()
 
 # Check if the current version of chromedriver exists
 chromedriver_autoinstaller.install()
