@@ -13,37 +13,56 @@
         h1 {
             text-align: center;
         }
-        ul {
-            list-style-type: none;
+        ol {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Create 5 columns */
+            gap: 10px; /* Space between items */
             padding: 0;
+            list-style-position: inside;
+            margin: 0;
         }
-        li {
+        ol li {
             background: #f4f4f4;
-            margin: 5px 0;
             padding: 10px;
             border-radius: 4px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <h1>Daily Words</h1>
-    <ul id="wordList"></ul>
+    <h1>Solució del Paraulògic</h1>
+    <ol id="wordList"></ol>
 
     <script>
+        // Function to get today's date in the format YYYY_MM_DD
+        function getTodayFormatted() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+            const day = String(today.getDate()).padStart(2, '0');
+            return `${year}_${month}_${day}`;
+        }
+
         async function fetchWords() {
             try {
-                const response = await fetch('solutions/solution_2025_01_08.txt'); // Adjust the path if necessary
+                // Generate the dynamic file name
+                const todayDate = getTodayFormatted();
+                const fileName = `data/solution_${todayDate}.txt`; // Adjust the path if necessary
+
+                // Fetch the file
+                const response = await fetch(fileName);
                 if (!response.ok) {
-                    throw new Error('Failed to fetch the words file.');
+                    throw new Error(`Failed to fetch the file: ${fileName}`);
                 }
                 const text = await response.text();
                 const words = text.split('\n').filter(word => word.trim() !== ''); // Split into lines and remove empty lines
                 
+                // Update the list on the page
                 const wordList = document.getElementById('wordList');
                 wordList.innerHTML = '';
-                words.forEach(word => {
+                words.forEach((word, index) => {
                     const li = document.createElement('li');
-                    li.textContent = word;
+                    li.textContent = `${index + 1}. ${word}`; // Add the word with its number
                     wordList.appendChild(li);
                 });
             } catch (error) {
