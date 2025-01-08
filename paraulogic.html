@@ -62,7 +62,7 @@
                 wordList.innerHTML = '';
                 words.forEach((word, index) => {
                     const li = document.createElement('li');
-                    li.textContent = `${index + 1}. ${word}`; // Add the word with its number
+                    li.textContent = word; // Add the word to the list
                     wordList.appendChild(li);
                 });
             } catch (error) {
