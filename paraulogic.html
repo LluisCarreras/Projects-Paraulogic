@@ -43,6 +43,8 @@
         del Paraulògic, només s'accepten les paraules que figuren al Diccionari de la llengua catalana de l'Institut d'Estudis Catalans (DIEC), i és precisament la dificultat en 
         aconseguir la totalitat de paraules d'aquest diccionari el que fa que pot ser la solució no contingui totes les paraules.</h3>
     <br><br>
+    <div id="chosenLetters"></div>
+    <br><br>
     <ol id="wordList"></ol>
 
     <script>
@@ -85,15 +87,14 @@
                 const centerMessage = `Lletra central: ${center_letter}`;
                 const centerMessageElement = document.createElement('p'); // Create a <p> element
                 centerMessageElement.textContent = centerMessage; // Set the text content of the <p>
-                const body = document.querySelector('body'); // Or any other container element
-                body.appendChild(centerMessageElement);
+                const chosenLetters = document.getElementById('chosenLetters');
+                chosenLetters.appendChild(centerMessageElement);
 
                 // Show the other letters
-                const otherMessage = `Re4sta de lletres: ${other_letters}`;
+                const otherMessage = `Resta de lletres: ${other_letters}`;
                 const otherMessageElement = document.createElement('p');
                 otherMessageElement.textContent = otherMessage;
-                body.appendChild(centerMessageElement);
-                body.appendChild(otherMessageElement);
+                chosenLetters.appendChild(otherMessageElement);
 
                 // Update the list on the page
                 const wordList = document.getElementById('wordList');
