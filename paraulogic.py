@@ -257,7 +257,7 @@ def get_solution(the_powerset, words_dict):
     print(solution_words)
     return solution_words
 
-def save_solution(solution):
+def save_solution(solution, letters):
     """
     Save the solution words to a text file with a timestamped filename.
 
@@ -295,6 +295,8 @@ def save_solution(solution):
     
     # Save in txt file
     textfile = open(path, "w")
+    letters_text = 'Letters: ' + letters
+    textfile.write(letters_text + "\n")
     for element in solution:
         textfile.write(element + "\n")
     textfile.close()
@@ -304,7 +306,7 @@ set_of_letters = get_letters()
 words_dict = make_dictionary()
 power_set = powerset(set_of_letters)
 solution = get_solution(power_set, words_dict)
-save_solution(solution)
+save_solution(solution, set_of_letters)
 
 
     
