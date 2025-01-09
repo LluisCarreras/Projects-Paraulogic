@@ -68,11 +68,37 @@
                 }
                 const text = await response.text();
                 const words = text.split('\n').filter(word => word.trim() !== ''); // Split into lines and remove empty lines
-                
+
+                // Get the letters of the day
+                const firstElement = words[0]; // Get the first element from the array
+                const wordsArray = firstElement.split(' '); // Split the string into two words
+                const letters = wordsArray[1]; // Take the second word
+                const center_letter = letters[0].toUpperCase(); // First letter capitalized
+                const other_letters = letters
+                    .slice(1) // Remaining letters
+                    .toUpperCase() // Convert all to uppercase
+                    .split('') // Convert to an array of characters
+                    .sort() // Sort alphabetically
+                    .join(', '); // Join into a string with ", "
+
+                // Show the center letter
+                const centerMessage = `Lletra central: ${center_letter}`;
+                const centerMessageElement = document.createElement('p'); // Create a <p> element
+                centerMessageElement.textContent = centerMessage; // Set the text content of the <p>
+                const body = document.querySelector('body'); // Or any other container element
+                body.appendChild(centerMessageElement);
+
+                // Show the other letters
+                const otherMessage = `Re4sta de lletres: ${other_letters}`;
+                const otherMessageElement = document.createElement('p');
+                otherMessageElement.textContent = otherMessage;
+                body.appendChild(centerMessageElement);
+                body.appendChild(otherMessageElement);
+
                 // Update the list on the page
                 const wordList = document.getElementById('wordList');
                 wordList.innerHTML = '';
-                words.forEach((word, index) => {
+                words.slice(1).forEach((word, index) => {
                     const li = document.createElement('li');
                     li.textContent = word; // Add the word to the list
                     wordList.appendChild(li);
