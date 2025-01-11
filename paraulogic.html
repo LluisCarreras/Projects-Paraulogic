@@ -104,7 +104,7 @@
                 const wordList = document.getElementById('wordList');
                 wordList.innerHTML = '';
                 words.slice(1).forEach((word, index) => {
-                    const allLettersContained = [...word].every((letter) => letters.includes(letter));
+                    const allLettersContained = [...letters].every((letter) => word.includes(letter));
                     if (allLettersContained) {
                         const li = document.createElement('li');
                         const boldElement = document.createElement("b");
