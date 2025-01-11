@@ -1,4 +1,4 @@
-Letters: latmguf
+Letters: lmuagtf
 aflamat
 aflat
 aflautat
@@ -57,6 +57,7 @@ gala
 galata
 galga
 gall
+galla
 gallat
 gallufa
 galta
