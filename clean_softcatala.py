@@ -105,7 +105,8 @@ with open(input_file, "r", encoding="utf-8") as infile:
             if raw_word in clean_words_lt:
                 for sublist in separated_words_lt:
                     if raw_word in sublist:
-                        words_to_add.extend(sublist)
+                        clean_sublist = [clean_word(word) for word in sublist]
+                        words_to_add.extend(clean_sublist)
 
 # Open the file in append mode
 with open(input_file, mode='a', newline='', encoding='utf-8') as file:
