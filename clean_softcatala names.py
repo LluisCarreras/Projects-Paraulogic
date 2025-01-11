@@ -2,8 +2,7 @@ import csv
 import re
 import unicodedata
 
-file_path = 'adjectius-fdic.txt' # Case: Adjectives
-#file_path = 'noms-fdic.txt' # Case: Names
+file_path = 'adjectius-fdic.txt'
 
 # Initialize an empty list to store words
 words_lt = []
@@ -77,9 +76,8 @@ with open(file_path, mode="r", encoding="utf-8") as file:
         if row_text[0] == '#':
             row_text = row_text[1:]
 
-        # Take only the rows that contain names in masculine and femenine
-        #if '=categories: MF;' in row_text: # Case: Names
-        if '=categories: A;' in row_text: # Case: Adjectives
+        # Take only the rows that contain adjectives
+        if '=categories: A;' in row_text:
 
             # Take the adjectives part of the row
             row_text = row_text.split('=')[0]
@@ -118,10 +116,8 @@ with open(input_file, "r", encoding="utf-8") as infile:
                     #clean_sublist = [clean_word(word) for word in sublist]
                     if raw_word in sublist:
                         for word in sublist:
-                            if word != raw_word:
+                            if raw_word != word:
                                 words_to_add.append(word)
-                                #print(raw_word + '\t\t\t' + word + '\t\t\t' + ' '.join(sublist))
-                                
                         
 
 
