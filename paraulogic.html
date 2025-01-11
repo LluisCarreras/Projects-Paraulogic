@@ -104,9 +104,19 @@
                 const wordList = document.getElementById('wordList');
                 wordList.innerHTML = '';
                 words.slice(1).forEach((word, index) => {
-                    const li = document.createElement('li');
-                    li.textContent = word; // Add the word to the list
-                    wordList.appendChild(li);
+                    const allLettersContained = [...word].every((letter) => model.includes(letter));
+                    if (allLettersContained) {
+                        const li = document.createElement('li');
+                        const boldElement = document.createElement("b");
+                        boldElement.textContent = word;
+                        boldElement.style.color = "red"; // Set the text color to red
+                        li.appendChild(boldElement); // Append bold text to the "li"
+                        wordList.appendChild(li);
+                    } else {
+                        const li = document.createElement('li');
+                        li.textContent = word; // Add the word to the list
+                        wordList.appendChild(li);
+                    }
                 });
             } catch (error) {
                 console.error('Error fetching words:', error);
