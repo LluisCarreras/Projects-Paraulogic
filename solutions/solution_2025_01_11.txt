@@ -1,4 +1,4 @@
-Letters: lmutagf
+Letters: lamtgfu
 aflamat
 aflat
 aflautat
@@ -36,6 +36,7 @@ faltat
 falua
 faluga
 famul
+famula
 fatal
 faula
 flam
