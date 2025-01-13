@@ -2,9 +2,8 @@ name: Automate Paraulogic Tasks
 
 on:
   schedule:
-    # Run the workflow every day at 22:10 UTC and 23:10 UTC
-    - cron: '10 23 * * *'  # 23:10 AM UTC (equivalent to 00:10 AM during Standard Time in Spain)
-    - cron: '10 22 * * *'  # 22:10 AM UTC (equivalent to 00:10 AM during Daylight Saving Time in Spain)
+    # Run the workflow every day at 2:10 UTC 
+    - cron: '10 2 * * *' 
   workflow_dispatch: # Allows manual triggering of the workflow
 
 jobs:
