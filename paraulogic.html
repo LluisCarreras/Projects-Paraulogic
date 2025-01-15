@@ -47,6 +47,7 @@
     <div id="chosenLetters"></div>
     <br><br>
     <ol id="wordList"></ol>
+    <div id="errorMessage"></div>
 
     <script>
         // Function to get today's date in the format YYYY_MM_DD
@@ -66,7 +67,9 @@
             try {
                 // Generate the dynamic file name
                 const todayDate = getTodayFormatted();
-                const fileName = `solutions/solution_${todayDate}.txt`; // Adjust the path if necessary
+                //const fileName = `solutions/solution_${todayDate}.txt`; // Adjust the path if necessary
+                const fileName = `C:/Users/Polida/Projects/Projects-Paraulogic/solutions/solution_${todayDate}.txt`; // Adjust the path if necessary
+                
 
                 // Fetch the file
                 const response = await fetch(fileName);
@@ -120,9 +123,9 @@
                     }
                 });
             } catch (error) {
+                const errorMessage = document.getElementById('errorMessage');
                 console.error('Error fetching words:', error);
-                const wordList = document.getElementById('wordList');
-                wordList.innerHTML = '<li>Error loading words. Please try again later.</li>';
+                errorMessage.innerHTML = '<p>Error loading words. Please try again later.</p>';
             }
         }
 
