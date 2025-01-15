@@ -7,7 +7,7 @@ def scrape_page(words):
     try:
         with sync_playwright() as p:
             # Launch the browser and open the page
-            browser = p.chromium.launch(headless=False)  # Set headless=True for non-UI mode
+            browser = p.chromium.launch(headless=True)  
             context = browser.new_context()
             page = context.new_page()
 
