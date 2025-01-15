@@ -89,6 +89,10 @@ html = '''<!DOCTYPE html><html lang="ca"><head>
       padding: 0
     }
 
+    h1 {
+        text-align: center;
+    }
+
     body {
       margin: 0 auto;
       max-width: 800px;
@@ -333,8 +337,7 @@ html = '''<!DOCTYPE html><html lang="ca"><head>
 hi poden faltar algunes paraules, però sí que conté totes les paraules que es poden trobar amb l'algoritme que s'ha fet servir per la resolució del Paraulògic. Segons les instruccions 
 del Paraulògic, només s'accepten les paraules que figuren al Diccionari de la llengua catalana de l'Institut d'Estudis Catalans (DIEC), i és precisament la dificultat en 
 aconseguir la totalitat de paraules d'aquest diccionari el que fa que pot ser la solució no contingui totes les paraules.</h3>
-<h3>Els tutis es mostren destacats amb color vermell.</h3>
-<br><br>
+<br>
   <div class="container-hexgrid">
     <ul id="hex-grid">
 '''
