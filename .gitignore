@@ -48,3 +48,4 @@ pip-wheel-metadata/
 *.sublime-project
 
 paraulogic/Scripts
+paraulogic/Lib

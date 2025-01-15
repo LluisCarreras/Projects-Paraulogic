@@ -1,61 +1,15 @@
 import csv
 from datetime import datetime
-#from selenium import webdriver
-#from selenium.webdriver.common.by import By
-#from selenium.webdriver.chrome.options import Options
-#from selenium.webdriver.chrome.service import Service
 from pathlib import Path
-#import shutil
-#import chromedriver_autoinstaller
-#from pyvirtualdisplay.display import Display
-#import platform
 from playwright.sync_api import sync_playwright
 
-'''
-def get_webdriver():
-
-    if platform.system() != "Windows":
-        from pyvirtualdisplay.display import Display
-        display = Display(visible=False, size=(800, 800))
-        display.start()
-
-    # Check if the current version of chromedriver exists
-    chromedriver_autoinstaller.install()
-    # and if it doesn't exist, download it automatically,
-    # then add chromedriver to path
-
-    chrome_options = webdriver.ChromeOptions()
-
-    # Add your options as needed
-    options = [
-        # Define window size here
-        "--window-size=1200,1200",
-        "--ignore-certificate-errors"
-
-        # "--headless",
-        # "--disable-gpu",
-        # "--window-size=1920,1200",
-        # "--ignore-certificate-errors",
-        # "--disable-extensions",
-        # "--no-sandbox",
-        # "--disable-dev-shm-usage",
-        # '--remote-debugging-port=9222'
-    ]
-
-    for option in options:
-        chrome_options.add_argument(option)
 
 
-    driver = webdriver.Chrome(options=chrome_options)
-
-    return driver
-
-    
-def get_letters_1():
+def get_letters():
     """
-    Scrape letters from the Paraulogic webpage using Selenium.
+    Scrape letters from the Paraulogic webpage using Playwright.
 
-    This function automates a browser using Selenium to extract letters displayed
+    This function automates a browser using Playwright to extract letters displayed
     on the "https://www.vilaweb.cat/paraulogic/" webpage. The letters are retrieved 
     from `<div>` elements with the class `hex-in`. One of these letters is designated 
     as the "center letter," identified by having the `id="center-letter"` attribute 
@@ -84,39 +38,6 @@ def get_letters_1():
     The function will return: "abcdefg"
     """
 
-    # Set up the Selenium WebDriver (e.g., ChromeDriver)
-    driver = get_webdriver() 
-    url = "https://www.vilaweb.cat/paraulogic/"
-    driver.get(url)
-
-    # Find all the <div> elements with the class "hex-in"
-    divs = driver.find_elements(By.CLASS_NAME, "hex-in")
-
-    # Extract the text from each <div>
-    letters = []
-    center_letter = None
-    for div in divs:
-        letter = div.find_element(By.TAG_NAME, "p").text
-        a_tag = div.find_element(By.CLASS_NAME, "hex-link")
-        element_id = a_tag.get_attribute("id")
-        if element_id == "center-letter":
-            center_letter = letter
-        letters.append(letter)
-    
-    # Format the letters
-    letters.remove(center_letter)
-    letters = [center_letter] + letters
-    letters = ''.join(letters) # type: ignore
-    letters = letters.lower()
-    print("Extracted letters:", letters)
-
-    # Close the browser
-    driver.quit()
-
-    return letters
-'''
-
-def get_letters():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)  # Use headless=False for debugging
         page = browser.new_page()
