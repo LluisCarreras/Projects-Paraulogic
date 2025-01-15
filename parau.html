@@ -1,85 +1,4 @@
-from playwright.sync_api import sync_playwright
-import re
-import csv
-
-
-def scrape_page(words):
-    try:
-        with sync_playwright() as p:
-            # Launch the browser and open the page
-            browser = p.chromium.launch(headless=False)  # Set headless=True for non-UI mode
-            context = browser.new_context()
-            page = context.new_page()
-
-            # Navigate to the webpage
-            url = "https://www.vilaweb.cat/paraulogic/"  
-            page.goto(url)
-
-            # Automate the process for each word in the list
-            for word in words:
-                # Write the word into the <p> element
-                page.evaluate(f"""
-                    document.getElementById('test-word').textContent = '{word}';
-                """)
-                
-                # Click the submit button
-                page.click('#submit-button')
-
-                # Optional: Add a short delay between submissions if needed
-                page.wait_for_timeout(500)  # Wait 0.5 seconds (adjust as needed)
-
-           
-            # Wait for the page to load fully
-            page.wait_for_load_state("networkidle")
-            
-            # Get the full HTML content of the page
-            #content = page.content()
-
-            # Extract the content of the <ul> with id "hex-grid"
-            ul_content = page.locator("ul#hex-grid").inner_html()
-
-            # Extract the content of the <div> with the specified class
-            div_content = page.locator("div.scoreboard").inner_html()
-
-            # Define the regular expression pattern
-            pattern_1 = r"<div>(.*?)</div>"
-            
-            # Search for the pattern in the input text
-            div_content_txt = re.search(pattern_1, div_content).group(0)
-
-            # Regular expression pattern to match the onclick attribute
-            pattern_2 = r' onclick(.*?)false\);"'
-             
-            # Clean all matches
-            clean_div_content = re.sub(pattern_2, '', div_content_txt)
-
-            score = page.locator("div#score").inner_html()
-            
-            browser.close()
-            return ul_content, clean_div_content, score
-        
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        #return None, None
-
-# List of words to submit
-word_lt = []
-
-file_path = 'solutions/solution.txt'
-
-# Read the CSV file
-with open(file_path, mode="r", encoding="utf-8") as file:
-    reader = csv.reader(file)
-    for row in reader:
-        word_lt.append(row[0])
-
-word_lt = word_lt[1:]
-
-ul_content, div_content, score = scrape_page(word_lt)
-
-nl = '\n'
-
-html = '''<!DOCTYPE html><html lang="ca"><head>
+<!DOCTYPE html><html lang="ca"><head>
   <title>Solució del Paraulògic</title>
   <meta charset="utf-8">
   <style>
@@ -329,44 +248,12 @@ html = '''<!DOCTYPE html><html lang="ca"><head>
 <body class="pangrama">
   <div class="container-hexgrid">
     <ul id="hex-grid">
-'''
-html += ul_content
-html += nl + '''</ul>
+<li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>u</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>p</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>l</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false" id="center-letter"><p>m</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>t</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>i</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>e</p></a></div></li>
+</ul>
 </div>
 <div class="scoreboard">
-'''
-html += div_content
-html += nl + '<div id="score">'
-html += score 
-html += '''</div>
+<div>Has trobat <span id="letters-found">47</span> <span id="found-suffix">paraules de les 48 possibles (entre les quals el tuti)</span><span id="discovered-text">: <span class="show-def">elemí</span>, <span class="show-def">elm</span>, <span class="show-def">empelt</span>, <span class="show-def">empit</span>, <span class="show-def">emú</span>, <span class="show-def">èmul</span>, <span class="show-def">ètim</span>, <span class="show-def">íleum</span>, <span class="show-def">ílium</span>, <span class="show-def">ímpetu</span>, <span class="show-def">impiu</span>, <span class="show-def">implume</span>, <span class="show-def">ítem</span>, <span class="show-def">límit</span>, <span class="show-def">lleme</span>, <span class="show-def">llim</span>, <span class="show-def">llum</span>, <span class="show-def">llumí</span>, <span class="show-def">mel</span>, <span class="show-def">melé</span>, <span class="show-def">mem</span>, <span class="show-def">met</span>, <span class="show-def">mètel</span>, <span class="show-def">metil</span>, <span class="show-def">metilè</span>, <span class="show-def">meu</span>, <span class="show-def">mil</span>, <span class="show-def">milè</span>, <span class="show-def">mili</span>, <span class="show-def">mill</span>, <span class="show-def">mim</span>, <span class="show-def">mite</span>, <span class="show-def">mitil</span>, <span class="show-def">mul</span>, <span class="show-def">mullim</span>, <span class="show-def pangrama">múltiple</span>, <span class="show-def">mut</span>, <span class="show-def">mutu</span>, <span class="show-def">pèplum</span>, <span class="show-def">pum</span>, <span class="show-def">tem</span>, <span class="show-def">temple</span>, <span class="show-def">templet</span>, <span class="show-def">tim</span>, <span class="show-def">túmul</span>, <span class="show-def">tumult</span>, <span class="show-def">últim</span>.</span></div>
+<div id="score">Puntuació: 174/179</div>
 </div>
 </body>
-</html>'''
-
-
-# File path where the HTML content will be saved
-file_path = "parau.html"
-
-# Save the string to a file
-with open(file_path, "w", encoding="utf-8") as file:
-    file.write(html)
-
-print(f"HTML content saved to {file_path}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</html>
