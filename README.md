@@ -11,7 +11,7 @@ Els reptes tècnics que han sorgit en el desenvolupament del projecte es poden r
 - Cada dia el Paraulògic s'actualitza amb un joc nou, el que suposa que canvien les lletres amb que es juga. Ha calgut fer una tasca de scrapping amb Playwright, ja que les dades de les lletres en joc es mostren a la pàgina del Paraulògic a partir d'una pàgina dinàmica.
 - S'ha hagut de desenvolupar un algoritme eficaç i eficient per trobar les paraules contingudes a la llista que suposen una solució a partir de les lletres que es proposen.
 - Per automatitzar aquestes tasques s'ha fet servir una Gitgub Action, amb la que s'obté la solució actualitzada del Paraulògic del dia actual.
-- La solució es mostra en una web de GitHub, que es pot veure a [Solució del Paraulògic](https://lluiscarreras.github.io/Projects-Paraulogic/paraulogic.html).
+- La solució es mostra en una web de GitHub, que es pot veure a [Solució del Paraulògic](https://lluiscarreras.github.io/Projects-Paraulogic/parau.html).
 
 
 
