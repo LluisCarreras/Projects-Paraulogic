@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="ca"><head>
+  <title>Paraulògic</title>
+  <meta charset="utf-8">
+  <style>
+    p,
+    ul {
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      margin: 0 auto;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Open Sans', sans-serif;
+      line-height: 30px;
+      position: relative;
+      color: #000;
+      background: #fff
+    }
+
+    body.dark {
+      color: #fff;
+      background: #212529
+    }
+
+    body.book {
+      background: #ebf7fd
+    }
+
+    body.quadern {
+      background: #ebf7fd
+    }
+
+    body,
+    html {
+      touch-action: manipulation
+    }
+
+    a {
+      color: #000;
+      background-color: transparent;
+      text-decoration: none;
+      font-weight: bolder
+    }
+
+    .dark a {
+      color: #fff
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    b,
+    strong {
+      font-weight: bolder
+    }
+
+    .scoreboard {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin-bottom: 20px
+    }
+
+    .scoreboard>div {
+      align-self: center;
+      line-height: 1.5;
+      margin: 4px 20px
+    }
+
+    .pangrama #stars {
+      color: #fc0
+    }
+
+    span.pangrama {
+      font-weight: bolder;
+      color: #ec4a49
+    }
+
+    #definition,
+    .sol-def {
+      font-size: 10pt;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      margin-top: 0;
+      margin-bottom: 10px
+    }
+
+    #definition a,
+    .sol-def a {
+      cursor: initial;
+      text-decoration: none
+    }
+
+    .title {
+      font-weight: 700
+    }
+
+    #definition h3,
+    .sol-def h3 {
+      font-weight: 400;
+      font-size: 14px;
+      color: #e3282a
+    }
+
+    .scoreboard div.copyright {
+      margin-bottom: 20px
+    }
+
+    #hex-grid {
+      display: grid;
+      grid-gap: 6px;
+      grid-template-columns: repeat(6, 2fr);
+      padding-bottom: 30px;
+      width: 250px;
+      margin: 0 auto;
+      font-size: .9em;
+      list-style-type: none;
+      overflow: hidden
+    }
+
+    .container-hexgrid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 0
+    }
+
+    .hex {
+      grid-column-end: span 2;
+      position: relative;
+      user-select: none;
+      pointer-events: none
+    }
+
+    .hex::after {
+      content: '';
+      display: block;
+      padding-bottom: 86.602%
+    }
+
+    .hex p {
+      text-transform: uppercase;
+      width: 100%;
+      padding: 38%;
+      box-sizing: border-box;
+      font-size: 1.4em;
+      color: #000
+    }
+
+    .hex #center-letter p {
+      color: #fff
+    }
+
+    .hex-in {
+      position: absolute;
+      width: 100%;
+      padding-bottom: 115.47%;
+      overflow: hidden;
+      transform: rotate3d(0, 0, 1, -60deg) skewY(30deg);
+      pointer-events: none
+    }
+
+    .hex-in * {
+      position: absolute
+    }
+
+    #center-letter {
+      background-color: #ec4a49
+    }
+
+    .hex-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      background-color: #63bcca;
+      overflow: hidden;
+      transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
+      outline: 0;
+      pointer-events: auto;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    .hex-link:not(.no-pointer):focus p,
+    .hex-link:not(.no-pointer):hover p {
+      box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, .1)
+    }
+
+    .hex:nth-child(5n+1) {
+      grid-column-start: 2
+    }
+
+    .hex:nth-child(5n+3) {
+      grid-column-start: 1
+    }
+
+    #test-word {
+      text-align: center
+    }
+
+    #cursor {
+      font-weight: 100;
+      color: #63bcca;
+      margin-top: -5px
+    }
+
+    .cursor-container {
+      font-size: 2rem;
+      position: relative;
+      margin: 30px auto;
+      margin-top: 10px
+    }
+
+    .container-notifications {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin-top: 8px
+    }
+
+    #message {
+      position: absolute;
+      background-color: #ec4a49;
+      color: #fff;
+      border-radius: 3px;
+      padding: 5px;
+      z-index: 100;
+      pointer-events: none
+    }
+
+    .message-ok {
+      background-color: #63bcca !important
+    }
+
+    .hide {
+      opacity: 0;
+      transition: opacity 1.5s
+    }
+
+    .hide-initial {
+      opacity: 0
+    }
+
+    .message-shake {
+      animation: shake .4s cubic-bezier(.36, .07, .19, .97) both;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      perspective: 1000px
+    }
+
+    @keyframes shake {
+
+      25%,
+      75% {
+        transform: translate3d(1px, 0, 0)
+      }
+
+      50% {
+        transform: translate3d(0, 0, 0)
+      }
+    }
+
+    
+  </style>
+</head>
+
+<body data-joc="2025-01-15" data-joc-ant="2025-01-14" data-joc-est="present" class="pangrama">
+  <div class="container-notifications">
+    <p class="hide" id="message" style="">Falta la lletra del mig</p>
+  </div>
+  <div class="cursor-container">
+    <p id="input-word"> <span id="test-word"></span><span id="cursor" style="opacity: 0;">|</span></p>
+  </div>
+  <div class="container-hexgrid">
+    <ul id="hex-grid"><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>u</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>t</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>i</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false" id="center-letter"><p>m</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>p</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>e</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>l</p></a></div></li></ul>
+    
+  </div>
+  <div class="scoreboard">
+    <div id="definition"></div>
+    <div>Has trobat <span id="letters-found">3</span> <span id="found-suffix">paraules de les 48 possibles (entre les quals el tuti)</span><span id="discovered-text">: <span class="show-def" onclick="f(&quot;elemí&quot;, event, false);">elemí</span>, <span class="show-def" onclick="f(&quot;elm&quot;, event, false);">elm</span>, <span class="show-def pangrama" onclick="f(&quot;múltiple&quot;, event, false);">múltiple</span>.</span></div>
+    <div id="score">Puntuació: 24/179</div>
+    
+  
+
+</body></html>
