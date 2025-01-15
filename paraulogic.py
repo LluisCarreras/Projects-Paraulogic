@@ -1,19 +1,17 @@
 import csv
 from datetime import datetime
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
+#from selenium import webdriver
+#from selenium.webdriver.common.by import By
+#from selenium.webdriver.chrome.options import Options
+#from selenium.webdriver.chrome.service import Service
 from pathlib import Path
-import shutil
-import chromedriver_autoinstaller
-from pyvirtualdisplay.display import Display
-import platform
+#import shutil
+#import chromedriver_autoinstaller
+#from pyvirtualdisplay.display import Display
+#import platform
+from playwright.sync_api import sync_playwright
 
-
-
-
-
+'''
 def get_webdriver():
 
     if platform.system() != "Windows":
@@ -53,8 +51,7 @@ def get_webdriver():
     return driver
 
     
-
-def get_letters():
+def get_letters_1():
     """
     Scrape letters from the Paraulogic webpage using Selenium.
 
@@ -117,7 +114,44 @@ def get_letters():
     driver.quit()
 
     return letters
+'''
 
+def get_letters():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)  # Use headless=False for debugging
+        page = browser.new_page()
+        url = "https://www.vilaweb.cat/paraulogic/"
+        page.goto(url)
+
+        # Wait for the elements to load
+        page.wait_for_selector(".hex-in")
+
+        # Find all the divs with class "hex-in"
+        divs = page.locator(".hex-in")
+
+        letters = []
+        center_letter = None
+
+        # Iterate through each div and extract the letter
+        for i in range(divs.count()):
+            div = divs.nth(i)
+            letter = div.locator("p").inner_text()
+            a_tag = div.locator(".hex-link")
+            element_id = a_tag.get_attribute("id")
+            if element_id == "center-letter":
+                center_letter = letter
+            letters.append(letter)
+
+        # Format the letters
+        if center_letter:
+            letters.remove(center_letter)
+            letters = [center_letter] + letters
+        letters = ''.join(letters).lower()
+
+        print("Extracted letters:", letters)
+
+        browser.close()
+        return letters
 
 def make_dictionary():
     """
