@@ -28,9 +28,12 @@ jobs:
         pip install -r requirements.txt
         playwright install
   
-    # Step 3: Run the Python script
-    - name: Run Python file
+    # Step 3: Run the Python scripts
+    - name: Run Python file to get solution
       run: python paraulogic.py
+
+    - name: Run Python file to create HTML
+      run: python write_solution.py
 
     # Step 4: Push changes to the repository
     - name: Configure Git user
