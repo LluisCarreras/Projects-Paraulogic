@@ -51,7 +51,7 @@
 
     <script>
         // Function to get today's date in the format YYYY_MM_DD
-        function getTodayFormatted() {
+        /*function getTodayFormatted() {
             const now = new Date();
 
             // Create an Intl.DateTimeFormat object for Spain
@@ -61,13 +61,14 @@
             // Format the date and reformat it into YYYY_MM_DD
             const [day, month, year] = formatter.format(now).split('/');
             return `${year}_${month}_${day}`;
-        }
+        }*/
 
         async function fetchWords() {
             try {
                 // Generate the dynamic file name
                 const todayDate = getTodayFormatted();
-                const fileName = `solutions/solution_${todayDate}.txt`; // Adjust the path if necessary
+                //const fileName = `solutions/solution_${todayDate}.txt`; // Adjust the path if necessary
+                const fileName = 'solutions/solution.txt'; // Adjust the path if necessary
 
                 // Fetch the file
                 const response = await fetch(fileName);

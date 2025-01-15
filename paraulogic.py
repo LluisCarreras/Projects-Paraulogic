@@ -26,8 +26,6 @@ def get_letters():
 
     Notes:
     ------
-    - Ensure you have Selenium installed (`pip install selenium`) and the appropriate 
-      WebDriver for your browser (e.g., ChromeDriver for Google Chrome).
     - The function assumes the structure of the Paraulogic webpage remains consistent.
 
     Example:
@@ -243,13 +241,23 @@ def save_solution(solution, letters):
     # Get the current working directory
     current_working_dir = Path.cwd()
     folder = "solutions"
-    filename = 'solution_' + today_date + '.txt'
+    filename_1 = 'solution_' + today_date + '.txt'
+    filename_2 = 'solution.txt'
 
     # Create a platform-independent path
-    path = current_working_dir / folder / filename
+    path_1 = current_working_dir / folder / filename_1
+    path_2 = current_working_dir / folder / filename_2
     
     # Save in txt file
-    textfile = open(path, "w")
+    textfile = open(path_1, "w")
+    letters_text = 'Letters: ' + letters
+    textfile.write(letters_text + "\n")
+    for element in solution:
+        textfile.write(element + "\n")
+    textfile.close()
+
+    # Save in txt file
+    textfile = open(path_2, "w")
     letters_text = 'Letters: ' + letters
     textfile.write(letters_text + "\n")
     for element in solution:
