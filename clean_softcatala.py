@@ -46,7 +46,7 @@ def clean_word(dirty_word):
     normalized_word = unicodedata.normalize('NFD', one_word)
     # Filter out combining characters (diacritics)
     normalized_word = ''.join(
-        char for char in normalized_word if unicodedata.category(char) != 'Mn')
+        char for char in normalized_word if unicodedata.category(char) != 'Mn' or char == 'ç')
 
     # Delete trailing '-'
     if normalized_word[0] == '-':
@@ -55,7 +55,7 @@ def clean_word(dirty_word):
         return None
 
     # Removes any non-word and non-space characters
-    normalized_word = re.sub(r'[^a-zA-Z\-]', "", normalized_word)
+    normalized_word = re.sub(r'[^a-zA-ZçÇ\-]', "", normalized_word)
 
     # Delete '-se'
     if normalized_word[-3:] == '-se':
