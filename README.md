@@ -6,7 +6,6 @@ Aquest projecte ha suposat a la vegada una mena de divertiment i un repte de pro
 
 Els reptes tècnics que han sorgit en el desenvolupament del projecte es poden resumir en la següent llista:
 
-- Per trobar les paraules que formen part de la solució del Paraulògic és necessari tenir les paraules del DIEC, i això no ha estat possible d'una manera formal. Per tant, s'hagut de fer una tasca prèvia de scrapping de la pàgina web del DIEC per poder obtenir aquesta llista de paraules.
 - Al Paraulògic les paraules s'introdueixen sense signes d'accentuació, dièresi, punts volats de les eles geminades ni guions. Per tant, a la llista de paraules original obtinguda amb scrapping se li han hagut d'aplicar uns processos de neteja per adaptar-les al format que admet el Paraulògic.
 - Cada dia el Paraulògic s'actualitza amb un joc nou, el que suposa que canvien les lletres amb que es juga. Ha calgut fer una tasca de scrapping amb Playwright, ja que les dades de les lletres en joc es mostren a la pàgina del Paraulògic a partir d'una pàgina dinàmica.
 - S'ha hagut de desenvolupar un algoritme eficaç i eficient per trobar les paraules contingudes a la llista que suposen una solució a partir de les lletres que es proposen.
