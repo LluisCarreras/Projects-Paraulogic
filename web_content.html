@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="ca"><head>
-  <title>Paraulògic</title>
+  <title>Solució del Paraulògic</title>
   <meta charset="utf-8">
   <style>
     p,
@@ -202,26 +202,6 @@
       text-align: center
     }
 
-    #cursor {
-      font-weight: 100;
-      color: #63bcca;
-      margin-top: -5px
-    }
-
-    .cursor-container {
-      font-size: 2rem;
-      position: relative;
-      margin: 30px auto;
-      margin-top: 10px
-    }
-
-    .container-notifications {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      margin-top: 8px
-    }
-
     #message {
       position: absolute;
       background-color: #ec4a49;
@@ -262,28 +242,25 @@
       50% {
         transform: translate3d(0, 0, 0)
       }
-    }
-
-    
+    } 
   </style>
 </head>
-
 <body data-joc="2025-01-15" data-joc-ant="2025-01-14" data-joc-est="present" class="pangrama">
-  <div class="container-notifications">
-    <p class="hide" id="message" style="">Falta la lletra del mig</p>
-  </div>
-  <div class="cursor-container">
-    <p id="input-word"> <span id="test-word"></span><span id="cursor" style="opacity: 0;">|</span></p>
-  </div>
   <div class="container-hexgrid">
-    <ul id="hex-grid"><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>u</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>t</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>i</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false" id="center-letter"><p>m</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>p</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>e</p></a></div></li><li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>l</p></a></div></li></ul>
-    
+    <ul id="hex-grid">
+      <li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>u</p></a></div></li>
+      <li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>t</p></a></div></li>
+      <li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>i</p></a></div></li>
+      <li class="hex"><div class="hex-in"><a class="hex-link" draggable="false" id="center-letter"><p>m</p></a></div></li>
+      <li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>p</p></a></div></li>
+      <li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>e</p></a></div></li>
+      <li class="hex"><div class="hex-in"><a class="hex-link" draggable="false"><p>l</p></a></div></li>
+    </ul>
   </div>
   <div class="scoreboard">
     <div id="definition"></div>
     <div>Has trobat <span id="letters-found">3</span> <span id="found-suffix">paraules de les 48 possibles (entre les quals el tuti)</span><span id="discovered-text">: <span class="show-def" onclick="f(&quot;elemí&quot;, event, false);">elemí</span>, <span class="show-def" onclick="f(&quot;elm&quot;, event, false);">elm</span>, <span class="show-def pangrama" onclick="f(&quot;múltiple&quot;, event, false);">múltiple</span>.</span></div>
     <div id="score">Puntuació: 24/179</div>
-    
-  
-
-</body></html>
+  </div>
+</body>
+</html>

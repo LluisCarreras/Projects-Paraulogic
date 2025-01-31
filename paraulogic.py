@@ -276,8 +276,7 @@ def get_solution_from_web():
         browser.close()
 
         solution = list(js_variable_value['p'].keys())
-        print(solution)
-
+        
         return solution
 
 

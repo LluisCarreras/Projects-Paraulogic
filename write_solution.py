@@ -76,6 +76,7 @@ with open(file_path, mode="r", encoding="utf-8") as file:
 word_lt = word_lt[1:]
 
 ul_content, div_content, score = scrape_page(word_lt)
+print(div_content)
 
 nl = '\n'
 
@@ -333,10 +334,7 @@ html = '''<!DOCTYPE html><html lang="ca"><head>
 <body class="pangrama">
 <h1>Solució del Paraulògic</h1>
 <br>
-<h3>En aquesta pàgina es mostra la solució del <a href="https://www.vilaweb.cat/paraulogic/">Paraulògic</a> del dia actual. Aquesta solució pot no ser completa, és a dir, 
-hi poden faltar algunes paraules, però sí que conté totes les paraules que es poden trobar amb l'algoritme que s'ha fet servir per la resolució del Paraulògic. Segons les instruccions 
-del Paraulògic, només s'accepten les paraules que figuren al Diccionari de la llengua catalana de l'Institut d'Estudis Catalans (DIEC), i és precisament la dificultat en 
-aconseguir la totalitat de paraules d'aquest diccionari el que fa que pot ser la solució no contingui totes les paraules.</h3>
+<h3>En aquesta pàgina es mostra la solució del <a href="https://www.vilaweb.cat/paraulogic/">Paraulògic</a> del dia actual.</h3>
 <br>
   <div class="container-hexgrid">
     <ul id="hex-grid">
