@@ -264,12 +264,33 @@ def save_solution(solution, letters):
         textfile.write(element + "\n")
     textfile.close()
 
+def get_solution_from_web():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)  # Set headless=True for background execution
+        page = browser.new_page()
+        page.goto("https://www.vilaweb.cat/paraulogic/")  # Replace with the target URL
 
-set_of_letters = get_letters()  
-words_dict = make_dictionary()
-power_set = powerset(set_of_letters)
-solution = get_solution(power_set, words_dict)
-save_solution(solution, set_of_letters)
+        # Execute JavaScript and retrieve the value of a variable
+        js_variable_value = page.evaluate("window.t")  # Replace 'yourVariable' with the actual variable name
+
+        browser.close()
+
+        solution = list(js_variable_value['p'].keys())
+        print(solution)
+
+        return solution
+
+
+set_of_letters = get_letters() 
+
+try:
+    solution = get_solution_from_web()
+except:
+    words_dict = make_dictionary()
+    power_set = powerset(set_of_letters)
+    solution = get_solution(power_set, words_dict)
+finally:
+    save_solution(solution, set_of_letters)
 
 
     
