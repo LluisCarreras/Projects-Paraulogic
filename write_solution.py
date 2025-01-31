@@ -41,22 +41,28 @@ def scrape_page(words):
             # Extract the content of the <div> with the specified class
             div_content = page.locator("div.scoreboard").inner_html()
 
-            # Define the regular expression pattern
-            pattern_1 = r"<div>(.*?)</div>"
-            
-            # Search for the pattern in the input text
-            div_content_txt = re.search(pattern_1, div_content).group(0)
-
-            # Regular expression pattern to match the onclick attribute
-            pattern_2 = r' onclick(.*?)false\);"'
+            # Regular expression pattern to match the div "definition"
+            # pattern_1 = r"<div id=&quot;definition&quot;>(.*?)</div>"
              
             # Clean all matches
-            clean_div_content = re.sub(pattern_2, '', div_content_txt)
+            # div_content = re.sub(pattern_1, '', div_content)
+
+            # Define the regular expression pattern
+            pattern_2 = r"<div>(.*?)</div>"
+            
+            # Search for the pattern in the input text
+            div_content = re.search(pattern_2, div_content).group(0)
+
+            # Regular expression pattern to match the onclick attribute
+            # pattern_3 = r' onclick(.*?)false\);"'
+             
+            # Clean all matches
+            # clean_div_content = re.sub(pattern_3, '', div_content_txt)
 
             score = page.locator("div#score").inner_html()
             
             browser.close()
-            return ul_content, clean_div_content, score
+            return ul_content, div_content, score
         
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -318,6 +324,14 @@ html = '''<!DOCTYPE html><html lang="ca"><head>
       backface-visibility: hidden;
       perspective: 1000px
     }
+    /*
+    .show-def {
+      cursor: pointer
+    }
+
+    .show-def:hover {
+      text-decoration: underline
+    }*/
 
     @keyframes shake {
 
@@ -351,7 +365,41 @@ html += score
 html += '''</div>
 </div>
 </body>
-</html>'''
+</html>
+<script>
+    function c() {
+      document.querySelectorAll(".sol-def").forEach(function(el) {
+        el.style.display = 'none';
+      });
+    }
+
+    function f(valid_word, event = null, solutions = false) {
+      if (event) {
+        event.preventDefault();
+      }
+      fetch('?diec=' + valid_word).then(response => response.json()).then(data => {
+        if (!data.d) {
+          return;
+        }
+        let def = data.d + '<div class="copyright">© Institut d’Estudis Catalans</div>';
+        if (solutions) {
+          c();
+          let element = event.target.parentElement.querySelectorAll(".sol-def")[0];
+          element.innerHTML = def;
+          element.style.display = 'block';
+          let parentElement = element.parentElement;
+          let yPosition = (parentElement.offsetTop - parentElement.scrollTop + parentElement.clientTop);
+          element.style.top = (yPosition + 30) + 'px';
+          let bounding = element.getBoundingClientRect();
+          if (bounding.bottom > (window.innerHeight || document.documentElement.clientHeight)) {
+            element.style.top = (yPosition - 300) + 'px';
+          }
+        } else {
+          document.getElementById("definition").innerHTML = def;
+        }
+      });
+    }
+</script>'''
 
 
 # File path where the HTML content will be saved
