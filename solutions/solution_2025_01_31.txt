@@ -1,7 +1,6 @@
-Letters: naserqu
+Letters: nuasrqe
 ananas
 anar
-anner
 annera
 ans
 ansa
@@ -47,7 +46,6 @@ nanser
 nansera
 nansu
 naquera
-naquerana
 narrar
 nas
 nau
@@ -89,5 +87,7 @@ sense
 serena
 serrana
 sunna
+una
 une
+unena
 urna

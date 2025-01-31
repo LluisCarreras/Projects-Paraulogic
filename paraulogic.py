@@ -37,7 +37,7 @@ def get_letters():
     """
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)  # Use headless=False for debugging
+        browser = p.chromium.launch(headless=True)  # Set headless=True for background execution, or headless=False for debugging
         page = browser.new_page()
         url = "https://www.vilaweb.cat/paraulogic/"
         page.goto(url)
@@ -266,7 +266,7 @@ def save_solution(solution, letters):
 
 def get_solution_from_web():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)  # Set headless=True for background execution
+        browser = p.chromium.launch(headless=True)  # Set headless=True for background execution, or headless=False for debugging
         page = browser.new_page()
         page.goto("https://www.vilaweb.cat/paraulogic/")  # Replace with the target URL
 
@@ -284,10 +284,12 @@ set_of_letters = get_letters()
 
 try:
     solution = get_solution_from_web()
+    print("Gets solution from web...")
 except:
     words_dict = make_dictionary()
     power_set = powerset(set_of_letters)
     solution = get_solution(power_set, words_dict)
+    print("Gets solution from list...")
 finally:
     save_solution(solution, set_of_letters)
 

@@ -74,6 +74,7 @@ with open(file_path, mode="r", encoding="utf-8") as file:
         word_lt.append(row[0])
 
 word_lt = word_lt[1:]
+print(word_lt)
 
 ul_content, div_content, score = scrape_page(word_lt)
 print(div_content)
