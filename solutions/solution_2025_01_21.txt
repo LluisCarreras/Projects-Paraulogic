@@ -1,24 +1,19 @@
-Letters: cieapo
+Letters: cpeaio
 acacia
 accepcio
 acci
 accia
 accio
 aci
-aco
 apoca
 apocope
 caca
 cacic
-caco
 cai
 caiac
 cap
 capa
-capac
-capca
 capcio
-capco
 capo
 capoc
 cec
@@ -63,7 +58,6 @@ opiacia
 paca
 paccio
 pec
-peca
 pic
 pica
 picapica

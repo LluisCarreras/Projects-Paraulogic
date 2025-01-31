@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-Letters: nqersau
-ananas
-anar
-=======
 Letters: nuesrqa
 ananas
 anar
 anner
->>>>>>> 284192d706bd41ff9546e60556d40bb60cc307e5
 annera
 ans
 ansa
@@ -53,10 +47,7 @@ nanser
 nansera
 nansu
 naquera
-<<<<<<< HEAD
-=======
 naquerana
->>>>>>> 284192d706bd41ff9546e60556d40bb60cc307e5
 narrar
 nas
 nau
@@ -98,11 +89,5 @@ sense
 serena
 serrana
 sunna
-<<<<<<< HEAD
-una
 une
-unena
-=======
-une
->>>>>>> 284192d706bd41ff9546e60556d40bb60cc307e5
 urna
