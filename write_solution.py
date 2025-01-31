@@ -90,7 +90,7 @@ html = '''<!DOCTYPE html><html lang="ca"><head>
       padding: 0
     }
 
-    h1 {
+    h1, h3 {
         text-align: center;
     }
 
